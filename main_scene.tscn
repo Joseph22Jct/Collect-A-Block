@@ -1,0 +1,14 @@
+[gd_scene load_steps=4 format=3 uid="uid://5lgs31xaphbr"]
+
+[ext_resource type="PackedScene" path="res://Scenes/lb_manager.tscn" id="1_0g5ac"]
+[ext_resource type="PackedScene" uid="uid://bocnr44gus1ep" path="res://Scenes/board_manager.tscn" id="1_l0md2"]
+[ext_resource type="Script" path="res://Scripts/GameManager.gd" id="1_qoox5"]
+
+[node name="MainScene" type="Node2D"]
+script = ExtResource("1_qoox5")
+
+[node name="BoardManager" parent="." instance=ExtResource("1_l0md2")]
+position = Vector2(360, 240)
+
+[node name="LBManager" parent="." instance=ExtResource("1_0g5ac")]
+position = Vector2(5, 6)
