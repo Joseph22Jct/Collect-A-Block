@@ -1,0 +1,16 @@
+[gd_scene load_steps=4 format=3 uid="uid://dkmcdxjtxcjlf"]
+
+[ext_resource type="Texture2D" uid="uid://c4luy6y8yppjd" path="res://Sprites/cursor.png" id="1_wxmai"]
+[ext_resource type="Script" path="res://Scripts/cursor.gd" id="1_xi2hi"]
+[ext_resource type="Texture2D" uid="uid://cmkpf7lcwwqtx" path="res://Sprites/cursorhighlight.png" id="2_oyacb"]
+
+[node name="Cursor" type="Node2D"]
+script = ExtResource("1_xi2hi")
+
+[node name="sprite" type="Sprite2D" parent="."]
+texture = ExtResource("1_wxmai")
+offset = Vector2(16, 0)
+
+[node name="Highlight" type="Sprite2D" parent="."]
+visible = false
+texture = ExtResource("2_oyacb")

@@ -1,22 +1,22 @@
-[gd_scene load_steps=4 format=3 uid="uid://d25qdjbgc3kti"]
+[gd_scene load_steps=3 format=3 uid="uid://d25qdjbgc3kti"]
 
-[ext_resource type="Script" path="res://Scripts/VisualPiece.gd" id="1_o7wpu"]
-
-[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_sqili"]
-load_path = "res://.godot/imported/Sprites.png-996aafbcca00a86b00314458598763fd.ctex"
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_u8txj"]
-atlas = SubResource("CompressedTexture2D_sqili")
-region = Rect2(0, 0, 32, 32)
+[ext_resource type="Script" path="res://Scripts/Piece.gd" id="1_33qpo"]
+[ext_resource type="Texture2D" uid="uid://865bo78f2vqe" path="res://Sprites/Sprites.png" id="2_jboxf"]
 
 [node name="Piece" type="Node2D"]
-script = ExtResource("1_o7wpu")
+script = ExtResource("1_33qpo")
 
 [node name="BG" type="Sprite2D" parent="."]
-texture = SubResource("AtlasTexture_u8txj")
+texture = ExtResource("2_jboxf")
+region_enabled = true
+region_rect = Rect2(0, 0, 32, 32)
 
 [node name="Icon" type="Sprite2D" parent="."]
-texture = SubResource("AtlasTexture_u8txj")
+texture = ExtResource("2_jboxf")
+region_enabled = true
+region_rect = Rect2(0, 64, 32, 32)
 
 [node name="Border" type="Sprite2D" parent="."]
-texture = SubResource("AtlasTexture_u8txj")
+texture = ExtResource("2_jboxf")
+region_enabled = true
+region_rect = Rect2(0, 32, 32, 32)

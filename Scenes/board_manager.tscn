@@ -1,16 +1,20 @@
-[gd_scene load_steps=4 format=3 uid="uid://dt36i0gjn2is6"]
+[gd_scene load_steps=5 format=3 uid="uid://kjvrxnmmq2xq"]
 
 [ext_resource type="Script" path="res://Scripts/BoardManager.gd" id="1_gfn3b"]
 [ext_resource type="Texture2D" uid="uid://bgknrq4yesl4x" path="res://Sprites/boardbg.png" id="2_ljfr0"]
-[ext_resource type="Script" path="res://Scenes/VisualBoard.gd" id="2_na56w"]
+[ext_resource type="PackedScene" uid="uid://dkmcdxjtxcjlf" path="res://Scenes/cursor.tscn" id="4_3a5hf"]
+[ext_resource type="Script" path="res://Scenes/CollectManager.gd" id="4_ndkeh"]
 
 [node name="BoardManager" type="Node2D"]
 script = ExtResource("1_gfn3b")
 
-[node name="VisualBoard" type="Node2D" parent="."]
-script = ExtResource("2_na56w")
-
-[node name="Board" type="Sprite2D" parent="VisualBoard"]
+[node name="Board" type="Sprite2D" parent="."]
 texture = ExtResource("2_ljfr0")
 
-[node name="VisualPieces" type="Node2D" parent="VisualBoard"]
+[node name="VisualPieces" type="Node2D" parent="."]
+
+[node name="Cursor" parent="." instance=ExtResource("4_3a5hf")]
+position = Vector2(-32, 18)
+
+[node name="CollectManager" type="Node2D" parent="."]
+script = ExtResource("4_ndkeh")
