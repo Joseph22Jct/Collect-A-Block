@@ -17,4 +17,5 @@ texture = ExtResource("2_ljfr0")
 position = Vector2(-32, 18)
 
 [node name="CollectManager" type="Node2D" parent="."]
+position = Vector2(169, -156)
 script = ExtResource("4_ndkeh")

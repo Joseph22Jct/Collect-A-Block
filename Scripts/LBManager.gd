@@ -19,21 +19,22 @@ func _ready():
 	_authentication_request()
 
 func _process(_delta):
-	if(Input.is_action_just_pressed("ui_up")):
-		score += 1
-		print("CurrentScore:"+str(score))
-	
-	if(Input.is_action_just_pressed("ui_down")):
-		score -= 1
-		print("CurrentScore:"+str(score))
-	
-	# Upload score when pressing enter
-	if(Input.is_action_just_pressed("ui_accept")):
-		_upload_score(score)
-	
-	# Get score when pressing spacebar
-	if(Input.is_action_just_pressed("ui_select")):
-		_get_leaderboards()
+	pass
+#	if(Input.is_action_just_pressed("ui_up")):
+#		score += 1
+#		print("CurrentScore:"+str(score))
+#
+#	if(Input.is_action_just_pressed("ui_down")):
+#		score -= 1
+#		print("CurrentScore:"+str(score))
+#
+#	# Upload score when pressing enter
+#	if(Input.is_action_just_pressed("ui_accept")):
+#		_upload_score(score)
+#
+#	# Get score when pressing spacebar
+#	if(Input.is_action_just_pressed("ui_select")):
+#		_get_leaderboards()
 
 
 func _authentication_request():

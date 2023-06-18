@@ -1,6 +1,5 @@
-[gd_scene load_steps=5 format=3 uid="uid://5lgs31xaphbr"]
+[gd_scene load_steps=4 format=3 uid="uid://5lgs31xaphbr"]
 
-[ext_resource type="PackedScene" path="res://Scenes/lb_manager.tscn" id="1_0g5ac"]
 [ext_resource type="PackedScene" uid="uid://kjvrxnmmq2xq" path="res://Scenes/board_manager.tscn" id="1_l0md2"]
 [ext_resource type="Script" path="res://Scripts/GameManager.gd" id="1_qoox5"]
 [ext_resource type="Texture2D" uid="uid://bmlmfsy3jasvy" path="res://Sprites/HideBar.png" id="4_jygmh"]
@@ -10,9 +9,6 @@ script = ExtResource("1_qoox5")
 
 [node name="BoardManager" parent="." instance=ExtResource("1_l0md2")]
 position = Vector2(360, 240)
-
-[node name="LBManager" parent="." instance=ExtResource("1_0g5ac")]
-position = Vector2(5, 6)
 
 [node name="HideBar" type="Sprite2D" parent="."]
 position = Vector2(360, 449)
