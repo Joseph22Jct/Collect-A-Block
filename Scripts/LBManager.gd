@@ -1,5 +1,5 @@
 extends Node
-
+class_name LBManager
 # Use this game API key if you want to test it with a functioning leaderboard
 # "987dbd0b9e5eb3749072acc47a210996eea9feb0"
 var game_API_key = "dev_cf03cc18fd884fabb1efc1e81b3ddb58"   # "dev_9ac82231ac724a01a0a9d698bc749af7"
@@ -10,13 +10,26 @@ var score = 0
 var PlayerName = "Peepee!"
 # HTTP Request node can only handle one call per node
 var auth_http = HTTPRequest.new()
-var leaderboard_http = HTTPRequest.new()
+var leaderboard_httpE = HTTPRequest.new()
+var leaderboard_httpM = HTTPRequest.new()
+var leaderboard_httpH = HTTPRequest.new()
 var submit_score_http = HTTPRequest.new()
 var set_name_http = HTTPRequest.new()
 var get_name_http = HTTPRequest.new()
+var leaderboard_http
+var EasyKey = "EasyPGLB"
+var MediumKey = "MediumPGLB"
+var HardKey = "HardPGLB"
 
+var EasyLB = []
+var MediumLB  = []
+var HardLB = []
+
+signal LBGathered(which, scores)
 func _ready():
 	_authentication_request()
+	await get_tree().process_frame
+	Globals.LBManager = self
 
 func _process(_delta):
 	pass
@@ -87,23 +100,50 @@ func _on_authentication_request_completed(result, response_code, headers, body):
 	# Clear node
 	auth_http.queue_free()
 	# Get leaderboards
-	_get_leaderboards()
+	_get_leaderboards(0)
 
 
-func _get_leaderboards():
+func _get_leaderboards(which):
+	match which:
+		0: 
+			leaderboard_key = EasyKey
+		1: 
+			leaderboard_key = MediumKey
+		2: 
+			leaderboard_key = HardKey
 	print("Getting leaderboards")
 	var url = "https://api.lootlocker.io/game/leaderboards/"+leaderboard_key+"/list?count=10"
 	var headers = ["Content-Type: application/json", "x-session-token:"+session_token]
 	
+	
+	match which:
+		0: 
+			leaderboard_httpE = HTTPRequest.new()
+			add_child(leaderboard_httpE)
+			leaderboard_httpE.request_completed.connect(E_on_leaderboard_request_completed)
+			# Send request
+			leaderboard_httpE.request(url, headers, HTTPClient.METHOD_GET, "")
+		1: 
+			leaderboard_httpM = HTTPRequest.new()
+			add_child(leaderboard_httpM)
+			leaderboard_httpM.request_completed.connect(M_on_leaderboard_request_completed)
+			# Send request
+			leaderboard_httpM.request(url, headers, HTTPClient.METHOD_GET, "")
+			
+		2: 
+			leaderboard_httpH = HTTPRequest.new()
+			add_child(leaderboard_httpH)
+			leaderboard_httpH.request_completed.connect(H_on_leaderboard_request_completed)
+			# Send request
+			leaderboard_httpH.request(url, headers, HTTPClient.METHOD_GET, "")
+			
 	# Create a request node for getting the highscore
-	leaderboard_http = HTTPRequest.new()
-	add_child(leaderboard_http)
-	leaderboard_http.request_completed.connect(_on_leaderboard_request_completed)
-	# Send request
-	leaderboard_http.request(url, headers, HTTPClient.METHOD_GET, "")
+	
+	
+	
 
 
-func _on_leaderboard_request_completed(result, response_code, headers, body):
+func E_on_leaderboard_request_completed(result, response_code, headers, body):
 	var json = JSON.parse_string(body.get_string_from_utf8())
 	
 	# Print data
@@ -114,18 +154,72 @@ func _on_leaderboard_request_completed(result, response_code, headers, body):
 	if("items" in json):
 		for n in json.items.size():
 			leaderboardFormatted += str(json.items[n].rank)+str(". ")
-			leaderboardFormatted += str(json.items[n].player.id)+str(" - ")
+			#leaderboardFormatted += str(json.items[n].player.id)+str(" - ")
 			leaderboardFormatted += str(json.items[n].player.name)+str(" - ")
 			leaderboardFormatted += str(json.items[n].score)+str("\n")
 		
 	# Print the formatted leaderboard to the console
 	print(leaderboardFormatted)
 	
+	emit_signal("LBGathered","0", leaderboardFormatted)
+	
 	# Clear node
-	leaderboard_http.queue_free()
+	leaderboard_httpE.queue_free()
 
+func M_on_leaderboard_request_completed(result, response_code, headers, body):
+	var json = JSON.parse_string(body.get_string_from_utf8())
+	
+	# Print data
+	print(json)
+	
+	# Formatting as a leaderboard
+	var leaderboardFormatted = ""
+	if("items" in json):
+		for n in json.items.size():
+			leaderboardFormatted += str(json.items[n].rank)+str(". ")
+			#leaderboardFormatted += str(json.items[n].player.id)+str(" - ")
+			leaderboardFormatted += str(json.items[n].player.name)+str(" - ")
+			leaderboardFormatted += str(json.items[n].score)+str("\n")
+		
+	# Print the formatted leaderboard to the console
+	print(leaderboardFormatted)
+	
+	emit_signal("LBGathered","1", leaderboardFormatted)
+	
+	# Clear node
+	leaderboard_httpM.queue_free()
+	
+func H_on_leaderboard_request_completed(result, response_code, headers, body):
+	var json = JSON.parse_string(body.get_string_from_utf8())
+	
+	# Print data
+	print(json)
+	
+	# Formatting as a leaderboard
+	var leaderboardFormatted = ""
+	if("items" in json):
+		for n in json.items.size():
+			leaderboardFormatted += str(json.items[n].rank)+str(". ")
+			#leaderboardFormatted += str(json.items[n].player.id)+str(" - ")
+			leaderboardFormatted += str(json.items[n].player.name)+str(" - ")
+			leaderboardFormatted += str(json.items[n].score)+str("\n")
+		
+	# Print the formatted leaderboard to the console
+	print(leaderboardFormatted)
+	
+	emit_signal("LBGathered","2", leaderboardFormatted)
+	
+	# Clear node
+	leaderboard_httpH.queue_free()
 
-func _upload_score(score):
+func _upload_score(which, score):
+	match which:
+		0: 
+			leaderboard_key = EasyKey
+		1: 
+			leaderboard_key = MediumKey
+		2: 
+			leaderboard_key = HardKey
 	var data = { "score": str(score)}
 	var headers = ["Content-Type: application/json", "x-session-token:"+session_token]
 	submit_score_http = HTTPRequest.new()

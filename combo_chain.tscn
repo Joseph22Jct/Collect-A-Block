@@ -1,0 +1,34 @@
+[gd_scene load_steps=5 format=3 uid="uid://ba8upugdt0fmx"]
+
+[ext_resource type="Script" path="res://ComboChain.gd" id="1_l51bs"]
+[ext_resource type="Texture2D" uid="uid://cd8o0300l8qrt" path="res://Sprites/chainSprites.png" id="2_s4wlc"]
+[ext_resource type="Texture2D" uid="uid://wey2bayr24lc" path="res://Sprites/combo holder.png" id="3_wrlho"]
+[ext_resource type="FontFile" uid="uid://cqfh0ingwvtxd" path="res://JosFont.ttf" id="4_hhhg4"]
+
+[node name="ComboChain" type="Node2D"]
+scale = Vector2(1.5, 1.5)
+script = ExtResource("1_l51bs")
+
+[node name="chain" type="Sprite2D" parent="."]
+z_index = 20
+texture = ExtResource("2_s4wlc")
+centered = false
+region_enabled = true
+region_rect = Rect2(0, 0, 20, 16)
+
+[node name="combo" type="TextureRect" parent="."]
+offset_right = 20.0
+offset_bottom = 16.0
+texture = ExtResource("3_wrlho")
+
+[node name="ComboLabel" type="Label" parent="combo"]
+offset_left = 1.0
+offset_right = 19.0
+offset_bottom = 18.0
+theme_override_colors/font_color = Color(1, 1, 0.835294, 1)
+theme_override_colors/font_shadow_color = Color(0.0901961, 0.0156863, 0.00392157, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("4_hhhg4")
+text = "5"
+horizontal_alignment = 1
+vertical_alignment = 1

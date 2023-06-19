@@ -1,0 +1,94 @@
+[gd_scene load_steps=3 format=3 uid="uid://bsp1r2nno47js"]
+
+[ext_resource type="Script" path="res://Scenes/register_record.gd" id="1_68dxd"]
+[ext_resource type="FontFile" uid="uid://cqfh0ingwvtxd" path="res://JosFont.ttf" id="1_b5mc1"]
+
+[node name="RegisterRecord" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_68dxd")
+
+[node name="modeLabel" type="Label" parent="."]
+layout_mode = 0
+offset_left = 37.0
+offset_top = 102.0
+offset_right = 298.0
+offset_bottom = 137.0
+theme_override_colors/font_color = Color(1, 1, 0.835294, 1)
+theme_override_colors/font_shadow_color = Color(0.0901961, 0.0156863, 0.00392157, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("1_b5mc1")
+theme_override_font_sizes/font_size = 28
+text = "You got a score of: "
+horizontal_alignment = 1
+
+[node name="label" type="Label" parent="."]
+layout_mode = 0
+offset_left = 31.0
+offset_top = 202.0
+offset_right = 292.0
+offset_bottom = 237.0
+theme_override_colors/font_color = Color(1, 1, 0.835294, 1)
+theme_override_colors/font_shadow_color = Color(0.0901961, 0.0156863, 0.00392157, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("1_b5mc1")
+theme_override_font_sizes/font_size = 28
+text = "Insert your name!"
+horizontal_alignment = 1
+
+[node name="ScoreLabel" type="Label" parent="."]
+layout_mode = 0
+offset_left = 26.0
+offset_top = 154.0
+offset_right = 287.0
+offset_bottom = 189.0
+theme_override_colors/font_color = Color(1, 1, 0.835294, 1)
+theme_override_colors/font_shadow_color = Color(0.0901961, 0.0156863, 0.00392157, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("1_b5mc1")
+theme_override_font_sizes/font_size = 28
+text = "00000000000000"
+horizontal_alignment = 1
+
+[node name="Label" type="Label" parent="."]
+layout_mode = 0
+offset_left = 41.0
+offset_top = 30.0
+offset_right = 183.0
+offset_bottom = 65.0
+theme_override_colors/font_color = Color(1, 1, 0.835294, 1)
+theme_override_colors/font_shadow_color = Color(0.0901961, 0.0156863, 0.00392157, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("1_b5mc1")
+theme_override_font_sizes/font_size = 28
+text = "Congratulations!"
+horizontal_alignment = 1
+
+[node name="TextEdit" type="TextEdit" parent="."]
+layout_mode = 0
+offset_left = 93.0
+offset_top = 258.0
+offset_right = 208.0
+offset_bottom = 298.0
+text = "Player"
+placeholder_text = "Player"
+
+[node name="SubmitButton" type="Button" parent="."]
+layout_mode = 0
+offset_left = 44.0
+offset_top = 338.0
+offset_right = 148.0
+offset_bottom = 378.0
+text = "Submit!"
+
+[node name="ToMainMenu" type="Button" parent="."]
+layout_mode = 0
+offset_left = 166.0
+offset_top = 339.0
+offset_right = 270.0
+offset_bottom = 379.0
+text = "To Main menu"

@@ -1,0 +1,98 @@
+[gd_scene load_steps=3 format=3 uid="uid://ne4ij1i05ceg"]
+
+[ext_resource type="FontFile" uid="uid://cqfh0ingwvtxd" path="res://JosFont.ttf" id="1_pnmec"]
+[ext_resource type="Script" path="res://Scenes/LBShowcase.gd" id="1_pxuvh"]
+
+[node name="Leaderboards" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_pxuvh")
+
+[node name="easy" type="Label" parent="."]
+layout_mode = 0
+offset_left = 41.0
+offset_top = 30.0
+offset_right = 183.0
+offset_bottom = 65.0
+theme_override_colors/font_color = Color(1, 1, 0.835294, 1)
+theme_override_colors/font_shadow_color = Color(0.0901961, 0.0156863, 0.00392157, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("1_pnmec")
+theme_override_font_sizes/font_size = 28
+text = "Easy"
+horizontal_alignment = 1
+
+[node name="LB" type="Label" parent="easy"]
+layout_mode = 0
+offset_left = -12.0
+offset_top = 53.0
+offset_right = 166.0
+offset_bottom = 375.0
+theme_override_colors/font_color = Color(1, 1, 0.835294, 1)
+theme_override_colors/font_shadow_color = Color(0.0901961, 0.0156863, 0.00392157, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("1_pnmec")
+theme_override_font_sizes/font_size = 15
+text = "Loading..."
+horizontal_alignment = 1
+
+[node name="medium" type="Label" parent="."]
+layout_mode = 0
+offset_left = 287.0
+offset_top = 32.0
+offset_right = 429.0
+offset_bottom = 67.0
+theme_override_colors/font_color = Color(1, 1, 0.835294, 1)
+theme_override_colors/font_shadow_color = Color(0.0901961, 0.0156863, 0.00392157, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("1_pnmec")
+theme_override_font_sizes/font_size = 28
+text = "Medium
+"
+horizontal_alignment = 1
+
+[node name="LB" type="Label" parent="medium"]
+layout_mode = 0
+offset_left = -12.0
+offset_top = 53.0
+offset_right = 166.0
+offset_bottom = 375.0
+theme_override_colors/font_color = Color(1, 1, 0.835294, 1)
+theme_override_colors/font_shadow_color = Color(0.0901961, 0.0156863, 0.00392157, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("1_pnmec")
+theme_override_font_sizes/font_size = 15
+text = "Loading..."
+horizontal_alignment = 1
+
+[node name="Hard" type="Label" parent="."]
+layout_mode = 0
+offset_left = 525.0
+offset_top = 34.0
+offset_right = 667.0
+offset_bottom = 69.0
+theme_override_colors/font_color = Color(1, 1, 0.835294, 1)
+theme_override_colors/font_shadow_color = Color(0.0901961, 0.0156863, 0.00392157, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("1_pnmec")
+theme_override_font_sizes/font_size = 28
+text = "Hard"
+horizontal_alignment = 1
+
+[node name="LB" type="Label" parent="Hard"]
+layout_mode = 0
+offset_left = -12.0
+offset_top = 53.0
+offset_right = 166.0
+offset_bottom = 375.0
+theme_override_colors/font_color = Color(1, 1, 0.835294, 1)
+theme_override_colors/font_shadow_color = Color(0.0901961, 0.0156863, 0.00392157, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("1_pnmec")
+theme_override_font_sizes/font_size = 15
+text = "Loading..."
+horizontal_alignment = 1

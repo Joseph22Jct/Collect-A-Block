@@ -9,6 +9,7 @@ var pos= [0,0]
 var falling = false
 var swapped = false
 var popping = false
+var chainEnabled = false
 var tween 
 var BM: BoardManager 
 func initialize():
@@ -25,7 +26,22 @@ func SetColor(num):
 	$Icon.region_rect = Rect2(color*32,64,32,32)
 	$Border.region_rect = Rect2(color*32,32,32,32)
 	pass
-
+func Explode():
+	match color:
+		0:
+			$Node2D.modulate = Color.RED
+		1:
+			$Node2D.modulate = Color.BLUE
+		2:
+			$Node2D.modulate = Color.GREEN
+		3:
+			$Node2D.modulate = Color.YELLOW
+		4:
+			$Node2D.modulate = Color.PURPLE
+		5:
+			$Node2D.modulate = Color.DARK_ORANGE
+	$Node2D.emitting = true
+	
 func SetPos(p,time = BM.gameSpeed - BM.cGST):
 	pos = p
 #	if(tween.is_running()):

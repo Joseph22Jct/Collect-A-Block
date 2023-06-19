@@ -56,6 +56,7 @@ func MoveCursor(pos):
 		print("Pos at "+str(curPos)+" where board is: "+ str(BM.Board[curPos[0]][curPos[1]].color))
 	else:
 		print("Pos at "+str(curPos)+" where board has no color")
+	Globals.SoundManager.PlaySoundEffect("Move")
 	pass
 
 func RiseBlocks():

@@ -1,15 +1,174 @@
-[gd_scene load_steps=4 format=3 uid="uid://5lgs31xaphbr"]
+[gd_scene load_steps=15 format=3 uid="uid://5lgs31xaphbr"]
 
 [ext_resource type="PackedScene" uid="uid://kjvrxnmmq2xq" path="res://Scenes/board_manager.tscn" id="1_l0md2"]
 [ext_resource type="Script" path="res://Scripts/GameManager.gd" id="1_qoox5"]
+[ext_resource type="FontFile" uid="uid://cqfh0ingwvtxd" path="res://JosFont.ttf" id="4_gdthj"]
 [ext_resource type="Texture2D" uid="uid://bmlmfsy3jasvy" path="res://Sprites/HideBar.png" id="4_jygmh"]
+[ext_resource type="Texture2D" uid="uid://bhonly2wmltd4" path="res://Sprites/collectui.png" id="4_ryv6r"]
+[ext_resource type="Texture2D" uid="uid://clxisc4na4bjc" path="res://Sprites/Controls1.png" id="6_8up5e"]
+[ext_resource type="Texture2D" uid="uid://1ech4mxktkfb" path="res://Sprites/Controls2.png" id="7_iea72"]
+[ext_resource type="Texture2D" uid="uid://0xc14t7nvu0c" path="res://Sprites/Controls7.png" id="8_tupwa"]
+[ext_resource type="Texture2D" uid="uid://qflkx6kaxx1t" path="res://Sprites/Controls8.png" id="9_g1owt"]
+[ext_resource type="Texture2D" uid="uid://68b0uaqfq6y8" path="res://Sprites/Controls9.png" id="10_yxd0f"]
+[ext_resource type="Texture2D" uid="uid://dx4vay3wm0oj1" path="res://Sprites/Controls4.png" id="11_byprn"]
+[ext_resource type="Texture2D" uid="uid://pxfupfwo871g" path="res://Sprites/Controls5.png" id="12_487ku"]
+[ext_resource type="Texture2D" uid="uid://cqqfc8nck0bmr" path="res://Sprites/Controls6.png" id="13_67rlu"]
+[ext_resource type="Texture2D" uid="uid://dqsybes6o6jj1" path="res://Sprites/Controls3.png" id="14_jlli6"]
 
 [node name="MainScene" type="Node2D"]
 script = ExtResource("1_qoox5")
+
+[node name="HideBar2" type="Sprite2D" parent="."]
+position = Vector2(529, 121)
+texture = ExtResource("4_ryv6r")
 
 [node name="BoardManager" parent="." instance=ExtResource("1_l0md2")]
 position = Vector2(360, 240)
 
 [node name="HideBar" type="Sprite2D" parent="."]
-position = Vector2(360, 449)
+position = Vector2(356, 244)
 texture = ExtResource("4_jygmh")
+
+[node name="ScoreLabel" type="Label" parent="."]
+offset_left = 232.0
+offset_top = 435.0
+offset_right = 493.0
+offset_bottom = 470.0
+theme_override_colors/font_color = Color(0.839216, 0.878431, 1, 1)
+theme_override_colors/font_shadow_color = Color(0.0784314, 0.00392157, 0.0901961, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("4_gdthj")
+theme_override_font_sizes/font_size = 28
+text = "0"
+horizontal_alignment = 1
+
+[node name="ScoreLabel2" type="Label" parent="."]
+offset_left = 78.0
+offset_top = 61.0
+offset_right = 215.0
+offset_bottom = 96.0
+theme_override_colors/font_color = Color(0.839216, 0.878431, 1, 1)
+theme_override_colors/font_shadow_color = Color(0.0784314, 0.00392157, 0.0901961, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("4_gdthj")
+theme_override_font_sizes/font_size = 28
+text = "Level:"
+horizontal_alignment = 1
+
+[node name="Level" type="Label" parent="."]
+offset_left = 78.0
+offset_top = 94.0
+offset_right = 215.0
+offset_bottom = 129.0
+theme_override_colors/font_color = Color(0.839216, 0.878431, 1, 1)
+theme_override_colors/font_shadow_color = Color(0.0784314, 0.00392157, 0.0901961, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("4_gdthj")
+theme_override_font_sizes/font_size = 28
+text = "1"
+horizontal_alignment = 1
+
+[node name="Node2D" type="Node2D" parent="."]
+
+[node name="ScoreLabel" type="Label" parent="Node2D"]
+offset_left = 29.0
+offset_top = 172.0
+offset_right = 157.0
+offset_bottom = 208.0
+theme_override_colors/font_color = Color(0.839216, 0.878431, 1, 1)
+theme_override_colors/font_shadow_color = Color(0.0784314, 0.00392157, 0.0901961, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("4_gdthj")
+theme_override_font_sizes/font_size = 16
+text = "Swap Pieces/
+Enter Swap mode"
+horizontal_alignment = 1
+
+[node name="ScoreLabel" type="Label" parent="Node2D/ScoreLabel"]
+layout_mode = 0
+offset_left = -11.0
+offset_top = 103.0
+offset_right = 149.0
+offset_bottom = 139.0
+theme_override_colors/font_color = Color(0.839216, 0.878431, 1, 1)
+theme_override_colors/font_shadow_color = Color(0.0784314, 0.00392157, 0.0901961, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("4_gdthj")
+theme_override_font_sizes/font_size = 16
+text = "Collect/Insert Pieces/
+Enter Collect Mode"
+horizontal_alignment = 1
+
+[node name="ScoreLabel2" type="Label" parent="Node2D/ScoreLabel"]
+layout_mode = 0
+offset_left = -69.0
+offset_top = 196.0
+offset_right = 134.0
+offset_bottom = 250.0
+theme_override_colors/font_color = Color(0.839216, 0.878431, 1, 1)
+theme_override_colors/font_shadow_color = Color(0.0784314, 0.00392157, 0.0901961, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("4_gdthj")
+theme_override_font_sizes/font_size = 16
+text = "Rise Pieces 
+(While not mid-
+combo/chain)"
+horizontal_alignment = 1
+
+[node name="ScoreLabel3" type="Label" parent="Node2D/ScoreLabel"]
+layout_mode = 0
+offset_left = 476.0
+offset_top = 62.0
+offset_right = 682.0
+offset_bottom = 134.0
+theme_override_colors/font_color = Color(0.839216, 0.878431, 1, 1)
+theme_override_colors/font_shadow_color = Color(0.0784314, 0.00392157, 0.0901961, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("4_gdthj")
+theme_override_font_sizes/font_size = 16
+text = "Connect 4 adjacent blocks!
+Make them fall into 
+other connections
+ for chains and more points!
+
+Arrange the blocks as they
+pop to chain more together!"
+horizontal_alignment = 1
+
+[node name="Controls1" type="Sprite2D" parent="."]
+position = Vector2(55, 230)
+texture = ExtResource("6_8up5e")
+
+[node name="Controls2" type="Sprite2D" parent="."]
+position = Vector2(92, 230)
+texture = ExtResource("7_iea72")
+
+[node name="Controls7" type="Sprite2D" parent="."]
+position = Vector2(128, 230)
+texture = ExtResource("8_tupwa")
+
+[node name="Controls8" type="Sprite2D" parent="."]
+position = Vector2(45, 336)
+scale = Vector2(1.25, 1.25)
+texture = ExtResource("9_g1owt")
+
+[node name="Controls9" type="Sprite2D" parent="."]
+position = Vector2(80, 336)
+scale = Vector2(1.25, 1.25)
+texture = ExtResource("10_yxd0f")
+
+[node name="Controls4" type="Sprite2D" parent="."]
+position = Vector2(117, 336)
+texture = ExtResource("11_byprn")
+
+[node name="Controls5" type="Sprite2D" parent="."]
+position = Vector2(154, 336)
+texture = ExtResource("12_487ku")
+
+[node name="Controls6" type="Sprite2D" parent="."]
+position = Vector2(138, 393)
+texture = ExtResource("13_67rlu")
+
+[node name="Controls3" type="Sprite2D" parent="."]
+position = Vector2(183, 393)
+texture = ExtResource("14_jlli6")

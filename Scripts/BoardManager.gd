@@ -22,11 +22,15 @@ var VB: VisualBoard
 var VisualPiece = preload("res://Scenes/piece.tscn")
 var baseScore = 100
 var comboMult = 1.00
-var chainMult = 1.5
+var chainMult = 3
 var CM : CollectManager
+var ComboDealer = preload("res://combo_chain.tscn")
 
 signal RisePieces()
 
+func GameOver():
+	Globals.FinishGame(colors, Globals.GameManager.GetScore())
+	pass
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	
@@ -74,6 +78,9 @@ func Swap(posA, posB): ##Swaps two pieces on a board
 	if(PieceB!=null):
 		if(PieceB.popping):
 			return
+	
+	if(PieceA == null and PieceB == null):
+		return
 	Board[posA[0]][posA[1]] = PieceB ##Make swap
 	Board[posB[0]][posB[1]] = PieceA
 	if(PieceA!=null): ##If the piece isnt null, then do the swap animation
@@ -81,11 +88,12 @@ func Swap(posA, posB): ##Swaps two pieces on a board
 	if(PieceB!=null):
 		PieceB.Swap(posA)
 	swapping = true ##let the board know you are currently swapping
+	Globals.SoundManager.PlaySoundEffect("Swap")
 	await get_tree().create_timer(0.1).timeout ##Let animation finish
 	
 	
-	CheckIfPop(posA) ##Check if anything pops from this, maybe check together
-	CheckIfPop(posB)
+	CheckIfPop(posA,false, true) ##Check if anything pops from this, maybe check together
+	CheckIfPop(posB, false, true)
 	swapping = false ##let the game know that you finished swapping
 	
 	
@@ -120,7 +128,7 @@ func InsertPiece(pos):
 	$VisualPieces.add_child(newPiece)
 	newPiece.initialize()
 	Board[pos[0]][pos[1]] = newPiece
-	
+	Globals.SoundManager.PlaySoundEffect("Insert")
 	newPiece.SetColor(col)
 	newPiece.position = Globals.GetPosition(pos)
 	newPiece.SetPos(pos)
@@ -135,6 +143,7 @@ func TakePiece(pos):
 	CM.Collect(tile.color)
 	tile.popping = true
 	tile.z_index = 10
+	Globals.SoundManager.PlaySoundEffect("Collect")
 	var tween = get_tree().create_tween()
 	tween.tween_property(tile, "scale", Vector2(2,2), gameSpeed/1.5)
 	var tween2 = get_tree().create_tween()
@@ -151,6 +160,7 @@ func InsertRow():
 	await get_tree().process_frame
 	for x in Board[0]:
 		if x!=null:##Game over??
+			GameOver()
 			return
 	RisePieces.emit()
 			
@@ -171,6 +181,7 @@ func InsertRow():
 		while(newPiece.color==prevColor or newPiece.color == upperColor ):
 			newPiece.SetColor(randi_range(0, colors-1))
 		prevColor = newPiece.color
+		RegisterPiecesForFalling([11,x])
 		
 		pass
 	Board.append(newRow)
@@ -263,18 +274,21 @@ func SortFallArray(arr):
 	return arr
 	pass
 	
-func CheckIfPop(pos, chain=false): ##if chain == true then that means that if there is a pop then it increases the chain
+func CheckIfPop(pos, chain=false, swap = false): ##if chain == true then that means that if there is a pop then it increases the chain
 	if(Board[pos[0]][pos[1]] == null):
 		RegisterPiecesForFalling(pos)
 		return
 	Board[pos[0]][pos[1]].falling = false
-	Board[pos[0]][pos[1]].popping = true
+	
+	
 	var connectsToPop = RecurssiveCheck([], Board[pos[0]][pos[1]].color, pos, [])
+	Board[pos[0]][pos[1]].popping = true
 	var combo = len(connectsToPop)
 	if(combo<4):
 		Board[pos[0]][pos[1]].popping = false
 		RegisterPiecesForFalling(pos)
 		return
+	
 	chainEnabled = chain
 	
 	PiecesToPop+= connectsToPop
@@ -292,6 +306,7 @@ func PopPieces():
 		PiecesToPop = []
 		return
 	if(chainEnabled):
+		
 		currentChain+=1
 		var score = baseScore
 		score *= (1+((combo-4)*comboMult))
@@ -306,19 +321,29 @@ func PopPieces():
 		score *= (1+((combo-4)*comboMult))
 		print("Chain start with a combo of: "+str(combo)+" and score: "+str(score))
 		Globals.GameManager.AddScore(score)
+	
+	if(currentChain>1 or combo>4):
+		Globals.SoundManager.PlaySoundEffect("ChainTrigger")
 		
 	var PosArray = []
 	var arr = PiecesToPop
 	ArrayOfPops.append(PiecesToPop)
 	var curPop = len(ArrayOfPops)-1
 	PiecesToPop = []
+	var Chainobj = null
 	for x in arr:
 		if(x == null):
 			continue
+		if(Chainobj  == null):
+			Chainobj = ComboDealer.instantiate()
+			add_child(Chainobj)
+			Chainobj.SetUp(x.pos, currentChain, combo)
 		x.popping = true 
 	for x in arr:
 		if(x == null):
 			continue
+		Globals.SoundManager.PlaySoundEffect("Pop")
+		x.Explode()
 		var tween = get_tree().create_tween()
 		tween.tween_property(x, "scale", Vector2(0,0), gameSpeed/1.5)
 		await tween.finished
@@ -349,8 +374,9 @@ func RecurssiveCheck(posList, color,pos, totalConnects):
 	posList.append(Board[pos[0]][pos[1]])
 	if(Board[pos[0]][pos[1]] == null):
 		return totalConnects
-	if color == Board[pos[0]][pos[1]].color and not Board[pos[0]][pos[1]].falling:
-		totalConnects.append(Board[pos[0]][pos[1]])
+	var tile = Board[pos[0]][pos[1]]
+	if color == tile.color and not tile.falling and not tile.popping:
+		totalConnects.append(tile)
 	else:
 		return totalConnects
 	

@@ -1,7 +1,8 @@
-[gd_scene load_steps=3 format=3 uid="uid://d25qdjbgc3kti"]
+[gd_scene load_steps=4 format=3 uid="uid://d25qdjbgc3kti"]
 
 [ext_resource type="Script" path="res://Scripts/Piece.gd" id="1_33qpo"]
 [ext_resource type="Texture2D" uid="uid://865bo78f2vqe" path="res://Sprites/Sprites.png" id="2_jboxf"]
+[ext_resource type="PackedScene" uid="uid://cro0b230ojoja" path="res://particles.tscn" id="3_2oot4"]
 
 [node name="Piece" type="Node2D"]
 script = ExtResource("1_33qpo")
@@ -20,3 +21,6 @@ region_rect = Rect2(0, 64, 32, 32)
 texture = ExtResource("2_jboxf")
 region_enabled = true
 region_rect = Rect2(0, 32, 32, 32)
+
+[node name="Node2D" parent="." instance=ExtResource("3_2oot4")]
+z_index = 10
